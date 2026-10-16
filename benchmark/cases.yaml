@@ -1,0 +1,208 @@
+# API Drift Guard consumer-impact benchmark.
+#
+# Ground truth is specified by hand from reading each consumer's code (`truth`,
+# `rationale`, `evidence`) and is independently checked by the executable oracle
+# (benchmark/oracle.py), which runs the consumer against mock responses generated
+# from the old and the new spec. A case is valid only if the consumer works on the
+# old contract and the oracle's verdict on the new one matches `truth`.
+#
+# truth:     affected | not_affected        (does the consumer's behaviour break?)
+# evidence:  "file:line" of the breaking code; any one counts as a hit
+# tags:      access pattern; see benchmark/README.md for the definitions
+# Paths are relative to this file.
+version: 1
+
+# Fixed analyzer settings for the full (agentic) mode, written into every run's config.
+tool_llm_settings:
+  model: groq/openai/gpt-oss-20b
+  escalation_model: groq/openai/gpt-oss-120b
+  escalation_confidence: 0.6
+  max_concurrency: 1
+  max_retries: 3
+  initial_backoff_seconds: 2.0
+  max_backoff_seconds: 60.0
+  request_timeout_seconds: 60.0
+  max_llm_requests: 20
+  max_context_chars: 6000
+  max_output_tokens: 2048
+  temperature: 0.0
+  reasoning_effort: low
+
+oracle:
+  provider_hosts: [user-service]
+  external_responses:
+    legacy-directory: {user_id: 7, name: Legacy User, plan: gold}
+
+consumers:
+  # Reused from the demo environment (evaluation/scenarios.yaml).
+  order-service:        {path: ../demo/order_service, module: order_service.orders, expr: "create_order(1, [{'price': 2.0}])"}
+  billing-service:      {path: ../demo/billing_service, module: billing_service.contacts, expr: "get_billing_contact(1)"}
+  notification-service: {path: ../demo/notification_service, module: notification_service.notifier, expr: "Notifier().build_payload(1)"}
+  # Benchmark-only consumers, one distinct access pattern each.
+  profile-cache:        {path: consumers/profile_cache, module: profile_cache.header, expr: "header_profile(1)"}
+  crm-sync:             {path: consumers/crm_sync, module: crm_sync.contacts, expr: "load_contact(1)"}
+  shipping:             {path: consumers/shipping, module: shipping.labels, expr: "shipping_label(1)"}
+  directory-export:     {path: consumers/directory_export, module: directory_export.export, expr: "export_directory()"}
+  greeting:             {path: consumers/greeting, module: greeting.messages, expr: "greeting(1)"}
+  email-normalizer:     {path: consumers/email_normalizer, module: email_normalizer.normalize, expr: "normalized_email(1)"}
+  field-mapper:         {path: consumers/field_mapper, module: field_mapper.mapping, expr: "to_billing_record(1)"}
+  legacy-directory:     {path: consumers/legacy_directory, module: legacy_directory.tiers, expr: "legacy_tier(1)"}
+  badge:                {path: consumers/badge, module: badge.labels, expr: "badge_label(1)"}
+  support-desk:         {path: consumers/support_desk, module: support_desk.tickets, expr: "ticket_contact(1)"}
+  audit-log:            {path: consumers/audit_log, module: audit_log.records, expr: "account_age_record(1)"}
+  profile-view:         {path: consumers/profile_view, module: profile_view.titles, expr: "profile_title(1)"}
+
+scenarios:
+  # ---- Reused demo scenarios (fixtures/, evaluation/scenarios.yaml) --------------------
+  - id: demo-user-id-renamed
+    old_spec: ../fixtures/openapi_before.json
+    new_spec: ../fixtures/openapi_after.json
+    change: user_id renamed to userId
+    tags: [renamed]
+    cases:
+      - {consumer: order-service, truth: affected, evidence: ["order_service/users_client.py:12"], tags: [direct-access],
+         rationale: "get_order_owner_id returns user['user_id']; create_order calls it."}
+      - {consumer: billing-service, truth: not_affected, tags: [reads-other-fields],
+         rationale: "Reads only name and email."}
+      - {consumer: notification-service, truth: not_affected, tags: [dynamic-access],
+         rationale: "Reads user[field] for field in TEMPLATE_FIELDS = (name, email, locale); user_id is not among them."}
+
+  - id: demo-email-renamed
+    old_spec: ../fixtures/openapi_before.json
+    new_spec: ../fixtures/openapi_after_email_renamed.json
+    change: email renamed to contact_email
+    tags: [renamed, multiple-affected]
+    cases:
+      - {consumer: order-service, truth: affected, evidence: ["order_service/users_client.py:25"], tags: [direct-access],
+         rationale: "get_confirmation_recipient returns user['email']."}
+      - {consumer: billing-service, truth: affected, evidence: ["billing_service/contacts.py:13"], tags: [direct-access],
+         rationale: "Builds its result from data['email']."}
+      - {consumer: notification-service, truth: affected, evidence: ["notification_service/notifier.py:17"], tags: [dynamic-access],
+         rationale: "TEMPLATE_FIELDS includes email, so user[field] raises KeyError."}
+
+  - id: demo-phone-added
+    old_spec: ../fixtures/openapi_before.json
+    new_spec: ../fixtures/openapi_after_phone_added.json
+    change: optional phone added
+    tags: [non-breaking]
+    cases:
+      - {consumer: order-service, truth: not_affected, tags: [non-breaking], rationale: "Additive change."}
+      - {consumer: billing-service, truth: not_affected, tags: [non-breaking], rationale: "Additive change."}
+      - {consumer: notification-service, truth: not_affected, tags: [non-breaking, dynamic-access], rationale: "Additive change."}
+
+  - id: demo-newsletter-removed
+    old_spec: ../fixtures/openapi_before.json
+    new_spec: ../fixtures/openapi_after_newsletter_removed.json
+    change: preferences.newsletter removed
+    tags: [removed]
+    cases:
+      - {consumer: order-service, truth: not_affected, tags: [not-called], rationale: "Never calls /users/{id}/preferences."}
+      - {consumer: billing-service, truth: not_affected, tags: [not-called], rationale: "Never calls /users/{id}/preferences."}
+      - {consumer: notification-service, truth: not_affected, tags: [not-called], rationale: "Never calls /users/{id}/preferences."}
+
+  - id: demo-locale-removed
+    old_spec: ../fixtures/openapi_before.json
+    new_spec: ../fixtures/openapi_after_locale_removed.json
+    change: locale removed
+    tags: [removed]
+    cases:
+      - {consumer: order-service, truth: not_affected, tags: [reads-other-fields], rationale: "Reads user_id, name and email only."}
+      - {consumer: billing-service, truth: not_affected, tags: [reads-other-fields], rationale: "Reads name and email only."}
+      - {consumer: notification-service, truth: affected, evidence: ["notification_service/notifier.py:17"], tags: [dynamic-access],
+         rationale: "TEMPLATE_FIELDS includes locale."}
+
+  # ---- Benchmark provider scenarios (benchmark/specs/, baseline v1) --------------------
+  - id: plan-renamed
+    old_spec: specs/v1.json
+    new_spec: specs/plan_renamed.json
+    change: plan renamed to tier
+    tags: [renamed, multiple-affected]
+    cases:
+      - {consumer: profile-cache, truth: affected, evidence: ["profile_cache/header.py:11"], tags: [cross-function],
+         rationale: "fetch_user returns the JSON; header_profile (another module) reads user['plan']."}
+      - {consumer: crm-sync, truth: affected, evidence: ["crm_sync/contacts.py:19"], tags: [model-validation],
+         rationale: "CrmContact requires plan; model_validate raises ValidationError."}
+      - {consumer: field-mapper, truth: affected, evidence: ["field_mapper/mapping.py:13"], tags: [dynamic-access],
+         rationale: "FIELD_MAP maps tier -> plan, so source[field] raises KeyError."}
+      - {consumer: legacy-directory, truth: not_affected, tags: [host-mismatch],
+         rationale: "Reads plan from http://legacy-directory, a different service with the same path shape."}
+      - {consumer: greeting, truth: not_affected, tags: [reads-other-fields, tolerant-access],
+         rationale: "Reads nickname (tolerantly) and name only."}
+
+  - id: email-removed
+    old_spec: specs/v1.json
+    new_spec: specs/email_removed.json
+    change: email removed
+    tags: [removed, multiple-affected]
+    cases:
+      - {consumer: crm-sync, truth: affected, evidence: ["crm_sync/contacts.py:19"], tags: [model-validation],
+         rationale: "CrmContact requires email."}
+      - {consumer: email-normalizer, truth: affected, evidence: ["email_normalizer/normalize.py:10"], tags: [tolerant-access],
+         rationale: "data.get('email') returns None, then .strip() raises AttributeError."}
+      - {consumer: support-desk, truth: affected, evidence: ["support_desk/tickets.py:11"], tags: [unsupported-client],
+         rationale: "Reads response.json()['email'] via the requests library."}
+      - {consumer: profile-view, truth: not_affected, tags: [attribute-access, cross-function],
+         rationale: "Only profile.user_id and profile.name are read from the namespace."}
+      - {consumer: shipping, truth: not_affected, tags: [reads-other-fields, nested-access],
+         rationale: "Reads name and address fields only."}
+
+  - id: nickname-removed
+    old_spec: specs/v1.json
+    new_spec: specs/nickname_removed.json
+    change: optional nickname removed
+    tags: [removed]
+    cases:
+      - {consumer: greeting, truth: not_affected, tags: [tolerant-access],
+         rationale: "profile.get('nickname') or profile['name'] falls back to name."}
+      - {consumer: badge, truth: not_affected, tags: [guarded-access],
+         rationale: "Reads data['nickname'] only inside `if 'nickname' in data`; otherwise uses name."}
+      - {consumer: profile-cache, truth: not_affected, tags: [cross-function, reads-other-fields],
+         rationale: "header_profile reads name and plan only."}
+
+  - id: zip-removed
+    old_spec: specs/v1.json
+    new_spec: specs/zip_removed.json
+    change: address.zip removed (nested)
+    tags: [removed]
+    cases:
+      - {consumer: shipping, truth: affected, evidence: ["shipping/labels.py:13"], tags: [nested-access],
+         rationale: "address['zip'] raises KeyError."}
+      - {consumer: field-mapper, truth: not_affected, tags: [dynamic-access],
+         rationale: "FIELD_MAP only selects user_id and plan."}
+      - {consumer: crm-sync, truth: not_affected, tags: [model-validation],
+         rationale: "CrmContact has no address field; Pydantic ignores extra input."}
+
+  - id: created-at-removed
+    old_spec: specs/v1.json
+    new_spec: specs/created_at_removed.json
+    change: created_at removed
+    tags: [removed, multiple-affected]
+    cases:
+      - {consumer: directory-export, truth: affected, evidence: ["directory_export/export.py:13"], tags: [array-access],
+         rationale: "Comprehension over GET /users reads u['created_at']."}
+      - {consumer: audit-log, truth: affected, evidence: ["audit_log/records.py:13"], tags: [async-client],
+         rationale: "Reads payload['created_at'] from an AsyncClient response."}
+
+  - id: user-id-renamed
+    old_spec: specs/v1.json
+    new_spec: specs/user_id_renamed.json
+    change: user_id renamed to id
+    tags: [renamed, multiple-affected]
+    cases:
+      - {consumer: profile-view, truth: affected, evidence: ["profile_view/titles.py:18", "profile_view/titles.py:13"], tags: [attribute-access, cross-function],
+         rationale: "profile.user_id raises AttributeError on the SimpleNamespace built from the JSON."}
+      - {consumer: directory-export, truth: affected, evidence: ["directory_export/export.py:13"], tags: [array-access],
+         rationale: "Comprehension reads u['user_id']."}
+      - {consumer: audit-log, truth: affected, evidence: ["audit_log/records.py:13"], tags: [async-client],
+         rationale: "Reads payload['user_id']."}
+      - {consumer: legacy-directory, truth: not_affected, tags: [host-mismatch],
+         rationale: "user_id comes from legacy-directory, not user-service."}
+
+  - id: avatar-added
+    old_spec: specs/v1.json
+    new_spec: specs/avatar_added.json
+    change: optional avatar_url added
+    tags: [non-breaking]
+    cases:
+      - {consumer: profile-cache, truth: not_affected, tags: [non-breaking, cross-function], rationale: "Additive change."}
+      - {consumer: field-mapper, truth: not_affected, tags: [non-breaking, dynamic-access], rationale: "Additive change."}

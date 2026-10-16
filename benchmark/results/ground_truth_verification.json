@@ -1,0 +1,397 @@
+{
+  "cases": 39,
+  "agreements": 39,
+  "disagreements": [],
+  "checks": [
+    {
+      "scenario": "demo-user-id-renamed",
+      "consumer": "order-service",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'user_id'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-user-id-renamed",
+      "consumer": "billing-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-user-id-renamed",
+      "consumer": "notification-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-email-renamed",
+      "consumer": "order-service",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'email'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-email-renamed",
+      "consumer": "billing-service",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'email'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-email-renamed",
+      "consumer": "notification-service",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'email'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-phone-added",
+      "consumer": "order-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-phone-added",
+      "consumer": "billing-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-phone-added",
+      "consumer": "notification-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-newsletter-removed",
+      "consumer": "order-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-newsletter-removed",
+      "consumer": "billing-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-newsletter-removed",
+      "consumer": "notification-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-locale-removed",
+      "consumer": "order-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-locale-removed",
+      "consumer": "billing-service",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "demo-locale-removed",
+      "consumer": "notification-service",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'locale'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "plan-renamed",
+      "consumer": "profile-cache",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'plan'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "plan-renamed",
+      "consumer": "crm-sync",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "ValidationError: 1 validation error for CrmContact\nplan\n  Field required [type=missing, input_value={'user_id': 1, 'name': 'n..., 'zip': 'zip-example'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "plan-renamed",
+      "consumer": "field-mapper",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'plan'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "plan-renamed",
+      "consumer": "legacy-directory",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "plan-renamed",
+      "consumer": "greeting",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "email-removed",
+      "consumer": "crm-sync",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "ValidationError: 1 validation error for CrmContact\nemail\n  Field required [type=missing, input_value={'user_id': 1, 'name': 'n..., 'zip': 'zip-example'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "email-removed",
+      "consumer": "email-normalizer",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "AttributeError: 'NoneType' object has no attribute 'strip'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "email-removed",
+      "consumer": "support-desk",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'email'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "email-removed",
+      "consumer": "profile-view",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "email-removed",
+      "consumer": "shipping",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "nickname-removed",
+      "consumer": "greeting",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "nickname-removed",
+      "consumer": "badge",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "nickname-removed",
+      "consumer": "profile-cache",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "zip-removed",
+      "consumer": "shipping",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'zip'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "zip-removed",
+      "consumer": "field-mapper",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "zip-removed",
+      "consumer": "crm-sync",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "created-at-removed",
+      "consumer": "directory-export",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'created_at'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "created-at-removed",
+      "consumer": "audit-log",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'created_at'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "user-id-renamed",
+      "consumer": "profile-view",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "AttributeError: 'types.SimpleNamespace' object has no attribute 'user_id'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "user-id-renamed",
+      "consumer": "directory-export",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'user_id'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "user-id-renamed",
+      "consumer": "audit-log",
+      "label": "affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": "KeyError: 'user_id'",
+      "oracle": "affected",
+      "agrees": true
+    },
+    {
+      "scenario": "user-id-renamed",
+      "consumer": "legacy-directory",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "avatar-added",
+      "consumer": "profile-cache",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    },
+    {
+      "scenario": "avatar-added",
+      "consumer": "field-mapper",
+      "label": "not_affected",
+      "works_on_old_contract": true,
+      "old_error": null,
+      "new_error": null,
+      "oracle": "not_affected",
+      "agrees": true
+    }
+  ]
+}

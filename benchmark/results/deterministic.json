@@ -1,0 +1,1785 @@
+{
+  "benchmark_version": 1,
+  "mode": "deterministic",
+  "analyzer_mode": "static",
+  "started_at": "2026-10-16T16:46:59.720267+00:00",
+  "finished_at": "2026-10-16T16:47:01.527643+00:00",
+  "environment": {
+    "python": "3.13.16",
+    "platform": "macOS-15.1-arm64-arm-64bit-Mach-O",
+    "analyzer_command": "api-drift-guard",
+    "analyzer_version": "0.1.0",
+    "oasdiff_version": "1.33.0",
+    "git": {
+      "commit": "12fdb5e8c02d2e02cd73a598d1d69c5337cb9314",
+      "dirty": true
+    }
+  },
+  "configuration": {
+    "cases_file": "benchmark/cases.yaml",
+    "cases_file_sha256": "83e1e7d3199ff2b048ae504f984c0c2a08de305089112b5242e61a106446e032",
+    "consumers_sha256": "b140a3b37b0070694e77fc2a4e9182eba92505b04bf696f571af7b39935e56dc",
+    "specs_sha256": "86aa348b918b31de930e07a9e932b43f39783103cd0ef72634a40cfd1fca33a7",
+    "scenario_filter": null,
+    "llm_settings": null,
+    "pause_seconds_between_llm_scenarios": null,
+    "seed": null
+  },
+  "ground_truth_verification": {
+    "cases": 39,
+    "agreements": 39
+  },
+  "metrics": {
+    "primary": {
+      "view": "primary",
+      "cases": 39,
+      "truly_affected": 17,
+      "true_positives": 9,
+      "false_positives": 4,
+      "true_negatives": 13,
+      "false_negatives": 1,
+      "abstentions": 12,
+      "abstentions_on_affected": 7,
+      "errors": 0,
+      "precision": 0.6923,
+      "recall": 0.5294,
+      "f1": 0.6,
+      "accuracy": 0.5641,
+      "abstention_rate": 0.3077
+    },
+    "strict": {
+      "view": "strict",
+      "cases": 39,
+      "truly_affected": 17,
+      "true_positives": 8,
+      "false_positives": 3,
+      "true_negatives": 13,
+      "false_negatives": 1,
+      "abstentions": 14,
+      "abstentions_on_affected": 8,
+      "errors": 0,
+      "precision": 0.7273,
+      "recall": 0.4706,
+      "f1": 0.5714,
+      "accuracy": 0.5385,
+      "abstention_rate": 0.359
+    },
+    "uncertain_rate": 0.3077,
+    "confusion_matrix": {
+      "affected": {
+        "affected": 8,
+        "potentially_affected": 1,
+        "uncertain": 7,
+        "no_relevant_usage_found": 1,
+        "not_analyzed": 0,
+        "error": 0
+      },
+      "not_affected": {
+        "affected": 3,
+        "potentially_affected": 1,
+        "uncertain": 5,
+        "no_relevant_usage_found": 8,
+        "not_analyzed": 5,
+        "error": 0
+      }
+    },
+    "evidence": {
+      "references_cited": 58,
+      "references_valid": 58,
+      "validity_rate": 1.0,
+      "true_positives_with_expected_evidence": 9,
+      "true_positives_citing_breaking_line": 9,
+      "breaking_line_hit_rate": 1.0
+    },
+    "by_tag": {
+      "array-access": {
+        "cases": 2,
+        "correct": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "async-client": {
+        "cases": 2,
+        "correct": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "attribute-access": {
+        "cases": 2,
+        "correct": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 2,
+        "errors": 0
+      },
+      "cross-function": {
+        "cases": 5,
+        "correct": 1,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 4,
+        "errors": 0
+      },
+      "direct-access": {
+        "cases": 3,
+        "correct": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "dynamic-access": {
+        "cases": 7,
+        "correct": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 5,
+        "errors": 0
+      },
+      "guarded-access": {
+        "cases": 1,
+        "correct": 0,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "host-mismatch": {
+        "cases": 2,
+        "correct": 0,
+        "false_positives": 2,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "model-validation": {
+        "cases": 3,
+        "correct": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 3,
+        "errors": 0
+      },
+      "multiple-affected": {
+        "cases": 19,
+        "correct": 9,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "uncertain": 7,
+        "errors": 0
+      },
+      "nested-access": {
+        "cases": 2,
+        "correct": 2,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "non-breaking": {
+        "cases": 5,
+        "correct": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "not-called": {
+        "cases": 3,
+        "correct": 3,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "reads-other-fields": {
+        "cases": 6,
+        "correct": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "uncertain": 1,
+        "errors": 0
+      },
+      "removed": {
+        "cases": 19,
+        "correct": 10,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "uncertain": 6,
+        "errors": 0
+      },
+      "renamed": {
+        "cases": 15,
+        "correct": 7,
+        "false_positives": 2,
+        "false_negatives": 0,
+        "uncertain": 6,
+        "errors": 0
+      },
+      "tolerant-access": {
+        "cases": 3,
+        "correct": 2,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "uncertain": 0,
+        "errors": 0
+      },
+      "unsupported-client": {
+        "cases": 1,
+        "correct": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "uncertain": 0,
+        "errors": 0
+      }
+    },
+    "timing": {
+      "scenario_runs": 12,
+      "total_seconds": 1.785,
+      "mean_seconds_per_scenario_run": 0.149,
+      "mean_seconds_per_case": 0.046
+    },
+    "llm": {
+      "agents_spawned": 0,
+      "requests": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "by_model": {},
+      "failed_investigations": 0,
+      "rate_limit_failures": 0
+    },
+    "scenario_errors": []
+  },
+  "scenarios": [
+    {
+      "id": "demo-user-id-renamed",
+      "change": "user_id renamed to userId",
+      "duration_seconds": 0.181,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "demo-user-id-renamed",
+          "consumer": "order-service",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "direct-access",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "order_service/users_client.py:12"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "order_service/users_client.py",
+              "line": 12,
+              "snippet": "return user[\"user_id\"]",
+              "note": "direct read of removed field \"user_id\"",
+              "valid": true
+            },
+            {
+              "file": "order_service/users_client.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `user_id` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "demo-user-id-renamed",
+          "consumer": "billing-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "reads-other-fields",
+            "renamed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "billing_service/contacts.py",
+              "line": 10,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-user-id-renamed",
+          "consumer": "notification-service",
+          "truth": "not_affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "renamed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "notification_service/notifier.py",
+              "line": 17,
+              "snippet": "return {field: user[field] for field in TEMPLATE_FIELDS}",
+              "note": "subscript with non-literal key `field`",
+              "valid": true
+            },
+            {
+              "file": "notification_service/notifier.py",
+              "line": 14,
+              "snippet": "response = self.client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `user_id` cannot be ruled out."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-email-renamed",
+      "change": "email renamed to contact_email",
+      "duration_seconds": 0.141,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "demo-email-renamed",
+          "consumer": "order-service",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "direct-access",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "order_service/users_client.py:25"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "order_service/users_client.py",
+              "line": 25,
+              "snippet": "return user[\"email\"]",
+              "note": "direct read of removed field \"email\"",
+              "valid": true
+            },
+            {
+              "file": "order_service/users_client.py",
+              "line": 22,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `email` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "demo-email-renamed",
+          "consumer": "billing-service",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "direct-access",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "billing_service/contacts.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "billing_service/contacts.py",
+              "line": 13,
+              "snippet": "return {\"name\": data[\"name\"], \"email\": data[\"email\"]}",
+              "note": "direct read of removed field \"email\"",
+              "valid": true
+            },
+            {
+              "file": "billing_service/contacts.py",
+              "line": 10,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `email` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "demo-email-renamed",
+          "consumer": "notification-service",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "notification_service/notifier.py:17"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "notification_service/notifier.py",
+              "line": 17,
+              "snippet": "return {field: user[field] for field in TEMPLATE_FIELDS}",
+              "note": "subscript with non-literal key `field`",
+              "valid": true
+            },
+            {
+              "file": "notification_service/notifier.py",
+              "line": 14,
+              "snippet": "response = self.client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `email` cannot be ruled out."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-phone-added",
+      "change": "optional phone added",
+      "duration_seconds": 0.138,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "no_breaking_changes",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "demo-phone-added",
+          "consumer": "order-service",
+          "truth": "not_affected",
+          "predicted": "not_analyzed",
+          "static_prediction": "not_analyzed",
+          "analysis_methods": [],
+          "confidences": [],
+          "tags": [
+            "non-breaking"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-phone-added",
+          "consumer": "billing-service",
+          "truth": "not_affected",
+          "predicted": "not_analyzed",
+          "static_prediction": "not_analyzed",
+          "analysis_methods": [],
+          "confidences": [],
+          "tags": [
+            "non-breaking"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-phone-added",
+          "consumer": "notification-service",
+          "truth": "not_affected",
+          "predicted": "not_analyzed",
+          "static_prediction": "not_analyzed",
+          "analysis_methods": [],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "non-breaking"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "demo-newsletter-removed",
+      "change": "preferences.newsletter removed",
+      "duration_seconds": 0.142,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "demo-newsletter-removed",
+          "consumer": "order-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "not-called",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-newsletter-removed",
+          "consumer": "billing-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "not-called",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-newsletter-removed",
+          "consumer": "notification-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "not-called",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "demo-locale-removed",
+      "change": "locale removed",
+      "duration_seconds": 0.148,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "demo-locale-removed",
+          "consumer": "order-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "reads-other-fields",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "order_service/users_client.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            },
+            {
+              "file": "order_service/users_client.py",
+              "line": 16,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            },
+            {
+              "file": "order_service/users_client.py",
+              "line": 22,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-locale-removed",
+          "consumer": "billing-service",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "reads-other-fields",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "billing_service/contacts.py",
+              "line": 10,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": []
+        },
+        {
+          "scenario": "demo-locale-removed",
+          "consumer": "notification-service",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "removed"
+          ],
+          "expected_evidence": [
+            "notification_service/notifier.py:17"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "notification_service/notifier.py",
+              "line": 17,
+              "snippet": "return {field: user[field] for field in TEMPLATE_FIELDS}",
+              "note": "subscript with non-literal key `field`",
+              "valid": true
+            },
+            {
+              "file": "notification_service/notifier.py",
+              "line": 14,
+              "snippet": "response = self.client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `locale` cannot be ruled out."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plan-renamed",
+      "change": "plan renamed to tier",
+      "duration_seconds": 0.149,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "plan-renamed",
+          "consumer": "profile-cache",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "cross-function",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "profile_cache/header.py:11"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "profile_cache/users_api.py",
+              "line": 11,
+              "snippet": "return response.json()",
+              "note": "returned from fetch_user()",
+              "valid": true
+            },
+            {
+              "file": "profile_cache/header.py",
+              "line": 11,
+              "snippet": "_CACHE[user_id] = {\"display_name\": user[\"name\"], \"plan\": user[\"plan\"]}",
+              "note": "reads key \"plan\" on a value not linked to a tracked response",
+              "valid": true
+            },
+            {
+              "file": "profile_cache/users_api.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{BASE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `plan` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "plan-renamed",
+          "consumer": "crm-sync",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "model-validation",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "crm_sync/contacts.py:19"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 19,
+              "snippet": "return CrmContact.model_validate(response.json())",
+              "note": "passed to CrmContact.model_validate()",
+              "valid": true
+            },
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 17,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `plan` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "plan-renamed",
+          "consumer": "field-mapper",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "field_mapper/mapping.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "field_mapper/mapping.py",
+              "line": 13,
+              "snippet": "return {target: source[field] for target, field in FIELD_MAP.items()}",
+              "note": "subscript with non-literal key `field`",
+              "valid": true
+            },
+            {
+              "file": "field_mapper/mapping.py",
+              "line": 10,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `plan` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "plan-renamed",
+          "consumer": "legacy-directory",
+          "truth": "not_affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "host-mismatch",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "legacy_directory/tiers.py",
+              "line": 10,
+              "snippet": "return f\"{record['user_id']}:{record['plan']}\"",
+              "note": "direct read of removed field \"plan\"",
+              "valid": true
+            },
+            {
+              "file": "legacy_directory/tiers.py",
+              "line": 9,
+              "snippet": "record = httpx.get(f\"{LEGACY_DIRECTORY}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `plan` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "plan-renamed",
+          "consumer": "greeting",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "multiple-affected",
+            "reads-other-fields",
+            "renamed",
+            "tolerant-access"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "greeting/messages.py",
+              "line": 9,
+              "snippet": "profile = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "email-removed",
+      "change": "email removed",
+      "duration_seconds": 0.155,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "email-removed",
+          "consumer": "crm-sync",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "model-validation",
+            "multiple-affected",
+            "removed"
+          ],
+          "expected_evidence": [
+            "crm_sync/contacts.py:19"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 19,
+              "snippet": "return CrmContact.model_validate(response.json())",
+              "note": "passed to CrmContact.model_validate()",
+              "valid": true
+            },
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 17,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `email` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "email-removed",
+          "consumer": "email-normalizer",
+          "truth": "affected",
+          "predicted": "potentially_affected",
+          "static_prediction": "potentially_affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "multiple-affected",
+            "removed",
+            "tolerant-access"
+          ],
+          "expected_evidence": [
+            "email_normalizer/normalize.py:10"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "email_normalizer/normalize.py",
+              "line": 10,
+              "snippet": "return data.get(\"email\").strip().lower()",
+              "note": "reads \"email\" via .get()",
+              "valid": true
+            },
+            {
+              "file": "email_normalizer/normalize.py",
+              "line": 9,
+              "snippet": "data = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `email` from a response that may come from GET /users/{user_id}, either tolerantly (.get()/`in`, which yields None/False instead of failing) or from a request whose endpoint is not certain."
+          ]
+        },
+        {
+          "scenario": "email-removed",
+          "consumer": "support-desk",
+          "truth": "affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "multiple-affected",
+            "removed",
+            "unsupported-client"
+          ],
+          "expected_evidence": [
+            "support_desk/tickets.py:11"
+          ],
+          "expected_evidence_hit": false,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "email-removed",
+          "consumer": "profile-view",
+          "truth": "not_affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "attribute-access",
+            "cross-function",
+            "multiple-affected",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "profile_view/titles.py",
+              "line": 13,
+              "snippet": "return SimpleNamespace(**response.json())",
+              "note": "unpacked with ** into SimpleNamespace()",
+              "valid": true
+            },
+            {
+              "file": "profile_view/titles.py",
+              "line": 11,
+              "snippet": "response = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `email` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "email-removed",
+          "consumer": "shipping",
+          "truth": "not_affected",
+          "predicted": "no_relevant_usage_found",
+          "static_prediction": "no_relevant_usage_found",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "multiple-affected",
+            "nested-access",
+            "reads-other-fields",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "shipping/labels.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "nickname-removed",
+      "change": "optional nickname removed",
+      "duration_seconds": 0.151,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "nickname-removed",
+          "consumer": "greeting",
+          "truth": "not_affected",
+          "predicted": "potentially_affected",
+          "static_prediction": "potentially_affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "removed",
+            "tolerant-access"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "greeting/messages.py",
+              "line": 10,
+              "snippet": "display = profile.get(\"nickname\") or profile[\"name\"]",
+              "note": "reads \"nickname\" via .get()",
+              "valid": true
+            },
+            {
+              "file": "greeting/messages.py",
+              "line": 9,
+              "snippet": "profile = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `nickname` from a response that may come from GET /users/{user_id}, either tolerantly (.get()/`in`, which yields None/False instead of failing) or from a request whose endpoint is not certain."
+          ]
+        },
+        {
+          "scenario": "nickname-removed",
+          "consumer": "badge",
+          "truth": "not_affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "guarded-access",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "badge/labels.py",
+              "line": 11,
+              "snippet": "return data[\"nickname\"]",
+              "note": "direct read of removed field \"nickname\"",
+              "valid": true
+            },
+            {
+              "file": "badge/labels.py",
+              "line": 9,
+              "snippet": "data = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `nickname` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "nickname-removed",
+          "consumer": "profile-cache",
+          "truth": "not_affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "cross-function",
+            "reads-other-fields",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "profile_cache/users_api.py",
+              "line": 11,
+              "snippet": "return response.json()",
+              "note": "returned from fetch_user()",
+              "valid": true
+            },
+            {
+              "file": "profile_cache/users_api.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{BASE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `nickname` cannot be ruled out."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zip-removed",
+      "change": "address.zip removed (nested)",
+      "duration_seconds": 0.142,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "zip-removed",
+          "consumer": "shipping",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "nested-access",
+            "removed"
+          ],
+          "expected_evidence": [
+            "shipping/labels.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "shipping/labels.py",
+              "line": 13,
+              "snippet": "return f\"{user['name']}, {address['city']} {address['zip']}\"",
+              "note": "direct read of removed field \"address/zip\"",
+              "valid": true
+            },
+            {
+              "file": "shipping/labels.py",
+              "line": 9,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `address/zip` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "zip-removed",
+          "consumer": "field-mapper",
+          "truth": "not_affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "field_mapper/mapping.py",
+              "line": 13,
+              "snippet": "return {target: source[field] for target, field in FIELD_MAP.items()}",
+              "note": "subscript with non-literal key `field`",
+              "valid": true
+            },
+            {
+              "file": "field_mapper/mapping.py",
+              "line": 10,
+              "snippet": "response = httpx.get(f\"{USER_SERVICE_URL}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `address/zip` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "zip-removed",
+          "consumer": "crm-sync",
+          "truth": "not_affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "model-validation",
+            "removed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 19,
+              "snippet": "return CrmContact.model_validate(response.json())",
+              "note": "passed to CrmContact.model_validate()",
+              "valid": true
+            },
+            {
+              "file": "crm_sync/contacts.py",
+              "line": 17,
+              "snippet": "response = client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `address/zip` cannot be ruled out."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "created-at-removed",
+      "change": "created_at removed",
+      "duration_seconds": 0.149,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "created-at-removed",
+          "consumer": "directory-export",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "array-access",
+            "multiple-affected",
+            "removed"
+          ],
+          "expected_evidence": [
+            "directory_export/export.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "directory_export/export.py",
+              "line": 13,
+              "snippet": "rows = [(u[\"user_id\"], u[\"name\"], u[\"created_at\"]) for u in users]",
+              "note": "direct read of removed field \"items/created_at\"",
+              "valid": true
+            },
+            {
+              "file": "directory_export/export.py",
+              "line": 12,
+              "snippet": "users = httpx.get(f\"{BASE}/users\", timeout=10.0).json()",
+              "note": "request to GET /users",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `items/created_at` from the GET /users response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "created-at-removed",
+          "consumer": "audit-log",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "async-client",
+            "multiple-affected",
+            "removed"
+          ],
+          "expected_evidence": [
+            "audit_log/records.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "audit_log/records.py",
+              "line": 13,
+              "snippet": "return {\"user\": str(payload[\"user_id\"]), \"created\": payload[\"created_at\"]}",
+              "note": "direct read of removed field \"created_at\"",
+              "valid": true
+            },
+            {
+              "file": "audit_log/records.py",
+              "line": 10,
+              "snippet": "response = await client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `created_at` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "user-id-renamed",
+      "change": "user_id renamed to id",
+      "duration_seconds": 0.144,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "breaking_changes_detected",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "user-id-renamed",
+          "consumer": "profile-view",
+          "truth": "affected",
+          "predicted": "uncertain",
+          "static_prediction": "uncertain",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "attribute-access",
+            "cross-function",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "profile_view/titles.py:18",
+            "profile_view/titles.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "profile_view/titles.py",
+              "line": 13,
+              "snippet": "return SimpleNamespace(**response.json())",
+              "note": "unpacked with ** into SimpleNamespace()",
+              "valid": true
+            },
+            {
+              "file": "profile_view/titles.py",
+              "line": 11,
+              "snippet": "response = httpx.get(f\"{BASE}/users/{user_id}\", timeout=5.0)",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "The GET /users/{user_id} response is used in ways static analysis cannot follow (dynamic keys or passed to other code), so a read of `user_id` cannot be ruled out."
+          ]
+        },
+        {
+          "scenario": "user-id-renamed",
+          "consumer": "directory-export",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "array-access",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "directory_export/export.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "directory_export/export.py",
+              "line": 13,
+              "snippet": "rows = [(u[\"user_id\"], u[\"name\"], u[\"created_at\"]) for u in users]",
+              "note": "direct read of removed field \"items/user_id\"",
+              "valid": true
+            },
+            {
+              "file": "directory_export/export.py",
+              "line": 12,
+              "snippet": "users = httpx.get(f\"{BASE}/users\", timeout=10.0).json()",
+              "note": "request to GET /users",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `items/user_id` from the GET /users response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "user-id-renamed",
+          "consumer": "audit-log",
+          "truth": "affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "async-client",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [
+            "audit_log/records.py:13"
+          ],
+          "expected_evidence_hit": true,
+          "evidence": [
+            {
+              "file": "audit_log/records.py",
+              "line": 13,
+              "snippet": "return {\"user\": str(payload[\"user_id\"]), \"created\": payload[\"created_at\"]}",
+              "note": "direct read of removed field \"user_id\"",
+              "valid": true
+            },
+            {
+              "file": "audit_log/records.py",
+              "line": 10,
+              "snippet": "response = await client.get(f\"/users/{user_id}\")",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `user_id` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        },
+        {
+          "scenario": "user-id-renamed",
+          "consumer": "legacy-directory",
+          "truth": "not_affected",
+          "predicted": "affected",
+          "static_prediction": "affected",
+          "analysis_methods": [
+            "static"
+          ],
+          "confidences": [],
+          "tags": [
+            "host-mismatch",
+            "multiple-affected",
+            "renamed"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [
+            {
+              "file": "legacy_directory/tiers.py",
+              "line": 10,
+              "snippet": "return f\"{record['user_id']}:{record['plan']}\"",
+              "note": "direct read of removed field \"user_id\"",
+              "valid": true
+            },
+            {
+              "file": "legacy_directory/tiers.py",
+              "line": 9,
+              "snippet": "record = httpx.get(f\"{LEGACY_DIRECTORY}/users/{user_id}\", timeout=5.0).json()",
+              "note": "request to GET /users/{user_id}",
+              "valid": true
+            }
+          ],
+          "reasons": [
+            "Reads `user_id` from the GET /users/{user_id} response by direct subscript, which raises KeyError once the field is removed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "avatar-added",
+      "change": "optional avatar_url added",
+      "duration_seconds": 0.145,
+      "exit_code": 0,
+      "error": null,
+      "tool_version": "0.1.0",
+      "oasdiff_version": "1.33.0",
+      "report_status": "no_breaking_changes",
+      "llm_usage": {
+        "agents_spawned": 0,
+        "llm_requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      "investigations": [],
+      "rate_limit_failures": 0,
+      "failed_investigations": 0,
+      "predictions": [
+        {
+          "scenario": "avatar-added",
+          "consumer": "profile-cache",
+          "truth": "not_affected",
+          "predicted": "not_analyzed",
+          "static_prediction": "not_analyzed",
+          "analysis_methods": [],
+          "confidences": [],
+          "tags": [
+            "cross-function",
+            "non-breaking"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        },
+        {
+          "scenario": "avatar-added",
+          "consumer": "field-mapper",
+          "truth": "not_affected",
+          "predicted": "not_analyzed",
+          "static_prediction": "not_analyzed",
+          "analysis_methods": [],
+          "confidences": [],
+          "tags": [
+            "dynamic-access",
+            "non-breaking"
+          ],
+          "expected_evidence": [],
+          "expected_evidence_hit": null,
+          "evidence": [],
+          "reasons": []
+        }
+      ]
+    }
+  ]
+}

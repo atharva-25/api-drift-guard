@@ -7,3 +7,6 @@ build/
 dist/
 .env
 reports/
+# Raw analyzer reports from benchmark runs (contain absolute local paths); the
+# per-case predictions are kept in benchmark/results/<mode>.json.
+benchmark/results/raw/

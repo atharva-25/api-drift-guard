@@ -222,6 +222,34 @@ constructed dataset. It shows that the pipeline resolves the intended ambiguity,
 it achieves this accuracy on real codebases. Confidence values are model estimates.
 Re-run with `api-drift-guard evaluate --mode agentic --markdown reports/evaluation.md`.
 
+## Benchmark
+
+[`benchmark/`](benchmark/README.md) is an independent, reproducible benchmark:
+- 39 consumer-impact cases across 12 OpenAPI changes, 17 truly affected
+- labels hand-written and confirmed by **executing each consumer** against mock responses generated from the old and new spec
+- the analyzer invoked only through its CLI
+
+Measured on 2026-10-16, one run per mode (full report: [`benchmark/results/comparison.md`](benchmark/results/comparison.md)):
+
+| | Precision | Recall | F1 | Uncertain rate | Valid evidence | Mean time / case | LLM requests (tokens) |
+|---|---|---|---|---|---|---|---|
+| Deterministic (oasdiff + AST) | 69.2% | 52.9% | 60.0% | 30.8% | 58/58 | 0.05 s | 0 |
+| Full (+ ADK agents on Groq gpt-oss) | 76.5% | 76.5% | 76.5% | 12.8% | 65/65 | 1.18 s | 18 (22.6K) |
+
+`potentially_affected` counts as positive. `uncertain` is never counted as correct and
+counts as a miss for recall. Errors that remain in both modes:
+- false positives on same-path calls to a different host, and on guarded reads
+- a false negative on a `requests`-based consumer, which the analyzer doesn't parse
+- `uncertain` on Pydantic-model validation, because agents don't see the model definition
+
+The cases are constructed, so these figures describe behaviour on the benchmark's
+patterns, not production accuracy.
+
+```bash
+python benchmark/run_benchmark.py verify && python benchmark/run_benchmark.py run --mode deterministic
+python benchmark/run_benchmark.py run --mode full && python benchmark/run_benchmark.py report
+```
+
 ## Tests
 
 ```bash
