@@ -201,18 +201,26 @@ consumers each use a different access pattern:
 | 4 | `preferences.newsletter` removed | nobody calls the endpoint; 0 agents |
 | 5 | `locale` removed | only notification, via dynamic access |
 
-Static results (`api-drift-guard evaluate`):
+Results from one run of `api-drift-guard evaluate --mode agentic` (Groq `openai/gpt-oss-20b`,
+2026-10-16). The evaluator scores static and LLM results separately from the same run:
 
 | Analysis | Correct | False positives | False negatives | Uncertain | Expected evidence found | Invalid evidence |
 |---|---|---|---|---|---|---|
 | Static | 12/15 (80%) | 0 | 0 | 3 | 5/5 | 0/17 |
-| Agentic | not yet measured | | | | | |
+| Agentic (static + LLM) | 15/15 (100%) | 0 | 0 | 0 | 5/5 | 0/20 |
 
-The 3 uncertain cases are all notification-service's dynamic access, the case the
-agents exist for. Agent counts matched expectations in all five scenarios (1, 1, 0, 0, 1).
-LLM-assisted accuracy hasn't been measured yet: run `api-drift-guard evaluate --mode agentic`
-with a Groq key. The evaluator scores static and LLM results separately from the same
-run, and treats `uncertain` as an abstention, not an error.
+- **Static analysis** settled 12 cases with direct evidence and abstained (`uncertain`) on 3:
+  notification-service's dynamic `user[field]` access, the case the agents exist for.
+- **The LLM agents** resolved all 3 correctly: `no_relevant_usage_found` for `user_id` (not in
+  `TEMPLATE_FIELDS`), and `affected` for `email` and `locale`. All cited evidence was verified.
+- **Agents spawned** matched expectations (1, 1, 0, 0, 1). The whole evaluation used 3 LLM
+  requests (about 1.1K prompt and 200 completion tokens each), with no retries and no
+  escalations to the 120B model.
+
+Caveats: this is a single run of a non-deterministic model on a small, deliberately
+constructed dataset. It shows that the pipeline resolves the intended ambiguity, not that
+it achieves this accuracy on real codebases. Confidence values are model estimates.
+Re-run with `api-drift-guard evaluate --mode agentic --markdown reports/evaluation.md`.
 
 ## Tests
 
