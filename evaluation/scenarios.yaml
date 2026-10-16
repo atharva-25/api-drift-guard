@@ -1,0 +1,74 @@
+# Ground truth for the demo environment. Paths are relative to this file.
+#
+# `expected` is the true impact on each consumer, judged by reading its code,
+# not what the static analyzer happens to output. Evidence lists the file:line a
+# correct detection should cite. `expected_agents` is the number of investigation
+# agents the coordinator should spawn (one per consumer that static analysis cannot settle).
+config: ../config.example.yaml
+old_spec: ../fixtures/openapi_before.json
+
+scenarios:
+  - id: 1_user_id_renamed
+    description: "A response property is removed (user_id renamed to userId); one consumer breaks."
+    new_spec: ../fixtures/openapi_after.json
+    expected_status: breaking_changes_detected
+    expected_agents: 1  # notification-service: dynamic keys
+    consumers:
+      order-service:
+        expected: affected
+        evidence: ["order_service/users_client.py:12"]
+      billing-service:
+        expected: no_relevant_usage_found
+      notification-service:
+        # TEMPLATE_FIELDS = ("name", "email", "locale") never selects user_id.
+        expected: no_relevant_usage_found
+
+  - id: 2_email_renamed
+    description: "A response property is removed (email renamed to contact_email); multiple consumers break."
+    new_spec: ../fixtures/openapi_after_email_renamed.json
+    expected_status: breaking_changes_detected
+    expected_agents: 1
+    consumers:
+      order-service:
+        expected: affected
+        evidence: ["order_service/users_client.py:25"]
+      billing-service:
+        expected: affected
+        evidence: ["billing_service/contacts.py:13"]
+      notification-service:
+        # user[field] for field in TEMPLATE_FIELDS reads "email" -> KeyError.
+        expected: affected
+        evidence: ["notification_service/notifier.py:17"]
+
+  - id: 3_phone_added
+    description: "A non-breaking optional property is added; no investigation agents are needed."
+    new_spec: ../fixtures/openapi_after_phone_added.json
+    expected_status: no_breaking_changes
+    expected_agents: 0
+    consumers:
+      order-service: {expected: no_relevant_usage_found}
+      billing-service: {expected: no_relevant_usage_found}
+      notification-service: {expected: no_relevant_usage_found}
+
+  - id: 4_newsletter_removed
+    description: "The contract changes (preferences.newsletter removed) but no known consumer uses it."
+    new_spec: ../fixtures/openapi_after_newsletter_removed.json
+    expected_status: breaking_changes_detected
+    expected_agents: 0
+    consumers:
+      order-service: {expected: no_relevant_usage_found}
+      billing-service: {expected: no_relevant_usage_found}
+      notification-service: {expected: no_relevant_usage_found}
+
+  - id: 5_locale_removed
+    description: "A consumer uses dynamic JSON access; static analysis cannot determine the impact."
+    new_spec: ../fixtures/openapi_after_locale_removed.json
+    expected_status: breaking_changes_detected
+    expected_agents: 1
+    consumers:
+      order-service: {expected: no_relevant_usage_found}
+      billing-service: {expected: no_relevant_usage_found}
+      notification-service:
+        # "locale" is in TEMPLATE_FIELDS, so user[field] raises KeyError.
+        expected: affected
+        evidence: ["notification_service/notifier.py:17"]

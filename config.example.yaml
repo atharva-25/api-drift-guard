@@ -1,0 +1,23 @@
+# Consumer paths are resolved relative to this file's directory.
+provider:
+  name: user-service
+
+consumers:
+  - name: order-service
+    path: ./demo/order_service
+
+  - name: billing-service
+    path: ./demo/billing_service
+
+  - name: notification-service
+    path: ./demo/notification_service
+
+# Optional; used only with --mode agentic. Defaults shown, sized for Groq's free tier.
+llm:
+  model: groq/openai/gpt-oss-20b
+  escalation_model: groq/openai/gpt-oss-120b   # null disables escalation
+  escalation_confidence: 0.6
+  max_concurrency: 1
+  max_retries: 3
+  max_llm_requests: 20
+  max_context_chars: 6000
